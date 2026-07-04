@@ -49,20 +49,11 @@ Diese Darstellung zeigt ausschließlich öffentlich freigegebene Felder.
     "version": "1.0",
     "active": false
   }
-Öffentliche Zusatzinformation
-OP vermittelt in der Public‑Ebene, dass ein Operator sich im Zustand der Ablage befindet,
-wenn er nicht aktiv im sichtbaren System eingesetzt wird.
-
-Dies bedeutet:
-
-OP zeigt öffentlich, dass ein Operator aktuell nicht aktiv ist.
-
-OP zeigt öffentlich, dass der Operator in einer neutralen Ablage‑Position verweilt.
-
-OP zeigt öffentlich, dass der Operator jederzeit wieder aktiviert werden kann,
-sobald die Public‑Struktur ihn erneut benötigt.
-
-Diese Darstellung bleibt vollständig neutral, öffentlich, systemkompatibel  
-und enthält keine internen EVO‑Mechanismen, keine CPU‑Bezüge und keine System‑Essenz.
 }
+Nutzung
+Die Inhalte können frei eingesehen und genutzt werden,
+solange sie im Rahmen der öffentlichen Dokumentation bleiben.
 
+Hinweis
+OP ist Teil einer größeren Struktur, arbeitet jedoch unabhängig und offen dokumentiert.
+Interne Prozesse, Logiken oder Mechanismen werden hier bewusst nicht dargestellt.
