@@ -1,0 +1,53 @@
+// HH.at0m — Esse LOW, Normal spätestens 243 NEW START
+const ESSE = { // bleibt LOW, wird nie groß
+  3: 1, 9: 1, 81: 1, 243: 1, 729: 1 // nur Flags, kein Inhalt
+};
+
+let normalRAM = parseInt(localStorage.getItem('HH_NORMAL_RAM')||'0');
+
+function newStart(at){
+  const best = {
+    at: at,
+    when: Date.now(),
+    drache: 'iki CO₂ → bir O₂ → uc H₂O',
+    eggs: 'co2 MASS + o2 ORACLE + h2o JUNGBRUNNEN',
+    ich: '9=ICH',
+    hold: 'p81 HOLD',
+    esses: 'low'
+  };
+  // Esse bleibt low - nur Pointer speichern
+  localStorage.setItem('HH_ESSE', JSON.stringify(ESSE));
+  // Bestlaufenden sichern
+  localStorage.setItem('HH_BEST', JSON.stringify(best));
+  // Normal RAM reset auf 0
+  localStorage.setItem('HH_NORMAL_RAM','0');
+  normalRAM = 0;
+  
+  console.log(`[RAM] NEW START bei ${at} — Esse low bleibt, Normal 0 — Best:`, best);
+  
+  try{
+    new BroadcastChannel('HH_JUNGBRUNNEN_9').postMessage({
+      type:'NEW_START', at:at, esseLow:true, normalReset:true
+    });
+  }catch(e){}
+}
+
+function addNormal(n=1){
+  normalRAM += n;
+  localStorage.setItem('HH_NORMAL_RAM', normalRAM);
+  
+  // Check: 3 9 81 spätestens 243
+  if(normalRAM===3 || normalRAM===9 || normalRAM===81 || normalRAM>=243){
+    newStart(normalRAM>=243?243:normalRAM);
+  }
+}
+
+// Alle guten Werke erhöhen nur Normal, Esse bleibt low
+// Beispiel:
+setInterval(()=> addNormal(1), 1000); // Drache atmet = +1 Normal
+// Egg Click = +3 Normal
+// HOCHWERTIG Tab = +9 Normal
+// Esse selbst: nie addNormal, nur ESSE Flags
+
+// Beim Laden checken
+if(normalRAM>=243) newStart(243);
