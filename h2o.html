@@ -1,1 +1,25 @@
-
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>h2o.html / JUNGBRUNNEN</title>
+<style>body{margin:0;background:#020617;color:#e0f2fe;font-family:system-ui;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;overflow:hidden}canvas{position:absolute;top:0;left:0}</style>
+</head><body>
+<canvas id="c"></canvas>
+<div style="position:relative;z-index:2;text-align:center;background:rgba(2,6,23,.8);padding:24px;border:1px solid #0ea5e9">
+<h1>h2o.html = JUNGBRUNNEN</h1>
+<p>BANK MARKT BÖRSE 3 innen 99 außen</p>
+<p>Fountain of Youth = Wasser = eiskalte Hand → Move</p>
+<p id="hold" style="color:#0ea5e9;font-weight:800">p81 HOLD: 0%</p>
+<p style="font-size:11px;color:#64748b">Odo POS3: prüft Jungbrunnen</p>
+</div>
+<script>
+let c=document.getElementById('c'),x=c.getContext('2d'),w,h,p=[];
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}resize();onresize=resize;
+for(let i=0;i<120;i++)p.push({x:w/2,y:h,vy:-2-Math.random()*6,vx:(Math.random()-.5)*3,life:Math.random()});
+let hold=0;
+function loop(){
+x.fillStyle='rgba(2,6,23,.15)';x.fillRect(0,0,w,h);
+p.forEach(o=>{o.y+=o.vy;o.x+=o.vx;o.vy+=0.04;if(o.y<h*0.2||o.life<0){o.x=w/2+(Math.random()-.5)*100;o.y=h;o.vy=-2-Math.random()*6;o.life=1}o.life-=0.005;
+x.fillStyle=`rgba(14,165,233,${o.life})`;x.beginPath();x.arc(o.x,o.y,2,0,7);x.fill();
+});
+hold=(hold+0.3)%100;document.getElementById('hold').textContent=`p81 HOLD: ${hold.toFixed(0)}% - ${hold>90?'MOVE FREI':'HOLD'}`;
+requestAnimationFrame(loop)
+}loop();
+</script></body></html>
