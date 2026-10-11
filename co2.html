@@ -1,1 +1,26 @@
-
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>co2.html / MASS</title>
+<style>body{margin:0;background:#0a0a0a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh}canvas{position:absolute;top:0;left:0}</style>
+</head><body>
+<canvas id="c"></canvas>
+<div style="position:relative;z-index:2;text-align:center">
+<h1>co2.html = MASS MESSER</h1>
+<p>π·r² = <span id="area">0</span> | Σr² bleibt = <span id="sum">0</span> kg</p>
+<p>CO2 → O2 = Wahrheit einwechseln</p>
+<p style="font-size:11px;color:#888">Odo POS1: QUECKSILBER prüft Masse</p>
+</div>
+<script>
+let c=document.getElementById('c'),x=c.getContext('2d'),w,h,blobs=[];
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+resize();onresize=resize;
+for(let i=0;i<8;i++)blobs.push({x:Math.random()*w,y:Math.random()*h,r:30+Math.random()*80,vx:(Math.random()-.5)*2,vy:(Math.random()-.5)*2});
+function loop(){
+x.fillStyle='#0a0a0a';x.fillRect(0,0,w,h);
+let sum=0;
+blobs.forEach(b=>{b.x+=b.vx;b.y+=b.vy;if(b.x<0||b.x>w)b.vx*=-1;if(b.y<0||b.y>h)b.vy*=-1;sum+=b.r*b.r;
+let g=x.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);g.addColorStop(0,'rgba(255,100,0,.8)');g.addColorStop(1,'rgba(255,100,0,0)');x.fillStyle=g;x.beginPath();x.arc(b.x,b.y,b.r,0,7);x.fill();
+});
+document.getElementById('area').textContent=(sum*3.1415).toFixed(0);
+document.getElementById('sum').textContent=sum.toFixed(0);
+requestAnimationFrame(loop)
+}loop();
+</script></body></html>
